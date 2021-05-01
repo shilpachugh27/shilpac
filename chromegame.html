@@ -1,0 +1,102 @@
+<!DOCTYPE html> 
+<html lang="en" onclick="jump()" onkeyup="jump()">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="game-css.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Among Us Game</title>
+  <style>
+        * {
+            font-family: monospace;
+            text-align: center;
+        }
+         .game {
+            width: 600px; 
+            height: 300px;
+            border-bottom: 2px dotted black;
+            margin: auto;
+            background-color:green;
+        }
+        #character {
+            height: 60px;
+            width: 50px;
+            position: relative;
+            top: 240px;
+        }
+        .animate {
+            animation: jump 1s infinite linear;
+        }
+        #block {
+            height: 65px;
+            width: 60px;
+            position: relative;
+            top: 175px;
+            left: 560px;
+            animation: block 1.5s infinite linear;
+        }
+        @keyframes jump {
+            0% {
+                top: 240px;
+            }
+            20% {
+                top: 70px;
+            }
+            70% {
+                top: 70px;
+            }
+            100% {
+                top: 240px;
+            }
+        }
+        @keyframes block {
+            0% {
+                left: 560px;
+            }
+            100% {
+                left: -20px;
+            }
+        }
+  </style>
+</head>
+<body>
+  <h1>CHROME GAME PERFECT PLAN B PRIVATE LIMITED</h1>
+  <h3>Made With Love</h3>
+  <h4>Use Arrow Up/Space Bar For Jumping</h4>
+  <div class="game">
+    <div id="character"><img src=
+    "https://i.pinimg.com/originals/12/79/9a/12799acb9addb72e8105993606156564.png"
+    alt="" style="height: 60px; width: 50px;"></div>
+    <div id="block"><img src=
+    "https://cdn2.iconfinder.com/data/icons/among-us-game-line/32/knife-512.png"
+    alt="" style="height: 65px; width: 60px;"></div>
+  </div>
+  <h2 style="text-align: center;">Score: <span id=
+  "scoreSpan"></span></h2>
+  <script>
+        const character = document.getElementById("character");
+        const block = document.getElementById("block");
+        var counter = 0;
+        function jump() {
+            character.classList.add("animate");
+            setTimeout(() => {
+                character.classList.remove("animate");
+            }, 1000)
+        };
+        var checkDead = setInterval(() => {
+             let ctp = parseInt(window.getComputedStyle(character).getPropertyValue('top'));
+             let blp = parseInt(window.getComputedStyle(block).getPropertyValue('left'));
+             console.log(ctp);
+             if (blp < 27 && blp > -20 && ctp >= 180) {
+             block.style.animation = "none";
+             alert("Game Over. Score: " + Math.floor(counter / 100));
+            counter = 0;
+            block.style.animation = "block 1.5s infinite linear"
+           } else {
+                counter++;
+                document.getElementById("scoreSpan").innerHTML = Math.floor(counter / 100);
+            }
+         }, 10);
+  </script>
+</body>
+</html>
